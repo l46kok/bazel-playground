@@ -16,7 +16,7 @@ def _codegen_impl(ctx):
     ctx.actions.run(
         inputs = [],
         outputs = [srcjar_output],
-        arguments = [srcjar_output.path],
+        arguments = [srcjar_output.path, ctx.attr.name],
         progress_message = "Generating java files into '%s'" % srcjar_output,
         executable = ctx.executable._tool,
     )

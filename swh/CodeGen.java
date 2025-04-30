@@ -17,16 +17,19 @@ public class CodeGen {
     System.out.println("Codegen called");
     String outPath = args[0];
     System.out.println("Outpath: " + outPath);
+    String packageName = args[1];
+    System.out.println("Package: " + packageName);
 
     Path currentWorkingDirectory = Paths.get("");
     String directoryPath = currentWorkingDirectory.toAbsolutePath().toString();
+
     System.out.println("Current working directory: " + directoryPath);
 
-    String fileContent = "package foo;\n"
+    String fileContent = "package " + packageName + ";\n"
         + "        \n"
         + "        public class SampleGeneratedCode {\n"
         + "          public static String getFoo() {\n"
-        + "            return \"foo\";\n"
+        + "            return \" " + packageName + "\";\n"
         + "          }\n"
         + "        }";
     String zipOutfile = outPath;

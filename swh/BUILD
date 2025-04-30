@@ -4,7 +4,11 @@ load("//swh:codegen.bzl", "java_lib_wrapper")
 package(default_visibility = ["//visibility:public"])
 
 java_lib_wrapper(
-    name = "lib_wrapper",
+    name = "foo",
+)
+
+java_lib_wrapper(
+    name = "bar",
 )
 
 java_binary(
@@ -12,7 +16,8 @@ java_binary(
     srcs = ["Main.java"],
     main_class = "swh.Main",
     deps = [
-        ":lib_wrapper",
+        ":bar",
+        ":foo",
     ],
 )
 
