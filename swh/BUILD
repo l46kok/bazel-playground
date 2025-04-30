@@ -1,10 +1,10 @@
 load("@rules_java//java:defs.bzl", "java_binary")
-load("//swh:codegen.bzl", "codegen")
+load("//swh:codegen.bzl", "java_lib_wrapper")
 
 package(default_visibility = ["//visibility:public"])
 
-codegen(
-    name = "foo",
+java_lib_wrapper(
+    name = "lib_wrapper",
 )
 
 java_binary(
@@ -12,12 +12,12 @@ java_binary(
     srcs = ["Main.java"],
     main_class = "swh.Main",
     deps = [
-        ":foo",
+        ":lib_wrapper",
     ],
 )
 
 java_binary(
-    name = "codegen",
+    name = "codegen_tool",
     srcs = ["CodeGen.java"],
     main_class = "swh.CodeGen",
     deps = [
