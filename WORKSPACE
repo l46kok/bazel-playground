@@ -9,13 +9,25 @@ http_archive(
     urls = ["https://github.com/protocolbuffers/protobuf/archive/v31.0.tar.gz"],
 )
 
+http_archive(
+    name = "rules_java",
+    urls = [
+        "https://github.com/bazelbuild/rules_java/releases/download/8.12.0/rules_java-8.12.0.tar.gz",
+    ],
+    sha256 = "1558508fc6c348d7f99477bd21681e5746936f15f0436b5f4233e30832a590f9",
+)
 
-# http_archive(
-#     name = "com_google_protobuf",
-#     sha256 = "008a11cc56f9b96679b4c285fd05f46d317d685be3ab524b2a310be0fbad987e",
-#     strip_prefix = "protobuf-29.3",
-#     urls = ["https://github.com/protocolbuffers/protobuf/archive/v29.3.tar.gz"],
-# )
+load("@rules_java//java:rules_java_deps.bzl", "rules_java_dependencies")
+rules_java_dependencies()
+
+load("@bazel_features//:deps.bzl", "bazel_features_deps")
+bazel_features_deps()
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+protobuf_deps()
+
+load("@rules_java//java:repositories.bzl", "rules_java_toolchains")
+rules_java_toolchains()
 
 ### rules_android setup
 http_archive(
@@ -25,17 +37,9 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_android/releases/download/v0.6.4/rules_android-v0.6.4.tar.gz",
 )
 
+
 load("@rules_android//:prereqs.bzl", "rules_android_prereqs")
 rules_android_prereqs()
-
-load("@rules_java//java:rules_java_deps.bzl", "rules_java_dependencies")
-rules_java_dependencies()
-
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-protobuf_deps()
-
-load("@rules_java//java:repositories.bzl", "rules_java_toolchains")
-rules_java_toolchains()
 
 load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
 rules_jvm_external_deps()
